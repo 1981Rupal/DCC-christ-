@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Mentors</title>
+    <link rel="stylesheet" href="mentors.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-container">
+        <aside class="sidebar">
+            <div class="profile-info">
+                <img src="placeholder-profile.png" alt="User Profile" class="profile-pic">
+                <div class="profile-name">Neha J</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="mentors.html" class="nav-item active">Mentors</a>
+                <a href="challenge.html" class="nav-item">Challenges</a>
+                <a href="profile.html" class="nav-item">Profile</a>
+                <a href="#" class="nav-item">Announcements</a>
+                <a href="#" class="nav-item">Messages</a>
+                <a href="login.html" class="nav-item">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search" class="search-input">
+                </div>
+                <div class="top-bar-icons">
+                    <img src="notification-icon.png" alt="Notifications">
+                    <img src="settings-icon.png" alt="Settings">
+                </div>
+            </header>
+
+            <div class="section-header">
+                <h1>Mentors</h1>
+                <div class="tabs">
+                    <span class="tab active">People</span>
+                    <span class="tab">Attendance</span>
+                </div>
+            </div>
+
+            <div class="add-member-section">
+                <button class="add-member-btn">➕ Add a member</button>
+            </div>
+
+            <div class="mentors-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Mentor</th>
+                            <th>Position</th>
+                            <th>Email</th>
+                            <th>Roll number/Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td><div class="mentor-name"><span class="tag tag-green">M</span> Manu Basavaraju</div></td>
+                            <td>Teacher</td>
+                            <td>manub@nitk.edu.in</td>
+                            <td>Theory of Computation</td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td><div class="mentor-name"><span class="tag tag-yellow">B</span> B R Chandrashekar</div></td>
+                            <td>Teacher</td>
+                            <td>brc@nitk.edu.in</td>
+                            <td>Design of Digital Systems</td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td><div class="mentor-name"><span class="tag tag-red">N</span> Nischal Basavaraju</div></td>
+                            <td>Student</td>
+                            <td>nischal.231cs139@nitk.edu.in</td>
+                            <td>231CS139</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

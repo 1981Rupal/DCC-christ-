@@ -1,0 +1,115 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #d2cec3;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.challenge-container {
+    width: 900px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-header {
+    background-color: #c7c2b6;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.challenge-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.question-box {
+    background-color: #e0dfdc;
+    padding: 25px;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4c2c5b;
+}
+
+.options-container {
+    margin-top: 30px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 25px;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.option:hover {
+    background-color: #e6e6e6;
+}
+
+.option.selected {
+    background-color: #b2d7b5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.option .icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #777;
+}
+
+.option p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.action-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.clear-response-btn {
+    background-color: transparent;
+    border: none;
+    color: #5a5555;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-btn {
+    background-color: #e0dfdc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #cfcfcf;
+}

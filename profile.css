@@ -1,0 +1,180 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f6f6f6;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #c1bbab;
+    padding: 30px;
+    border-right: 2px solid #d9cbaa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-info {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.nav-item {
+    padding: 15px 20px;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-icons img {
+    height: 30px;
+    margin-left: 20px;
+}
+
+.profile-details-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.details-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+.detail-item {
+    margin-bottom: 15px;
+}
+
+.detail-item .label {
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.detail-item .value {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.bar-chart-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    flex-grow: 2;
+}
+
+.bar-chart-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.chart {
+    display: flex;
+    height: 250px;
+    position: relative;
+    border-bottom: 2px solid #ccc;
+    padding-left: 40px;
+}
+
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+.y-axis span {
+    font-size: 0.8rem;
+    color: #666;
+    transform: translateY(-50%);
+}
+
+.bar-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.bar {
+    background-color: #b0a89d;
+    width: 30px;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: height 0.3s ease;
+    margin: 0 10px;
+}
+
+.bar-label {
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.bar-1 { height: 80%; }
+.bar-2 { height: 60%; }
+.bar-3 { height: 100%; }
+.bar-4 { height: 45%; }
+.bar-5 { height: 90%; }
