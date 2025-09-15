@@ -15,18 +15,43 @@ app.get('/', (req, res) => {
 
 // Sample data for the challenge
 // TEXT HAS BEEN CHANGED HERE
-const challengeData = {
-  question: "Which element is used to get highlighted text in HTML5?",
-  options: [
-    { id: 'u', text: "Underline Tag" },
-    { id: 'mark', text: "Mark Tag" },
-    { id: 'highlight', text: "Highlight Tag" }
-  ]
-};
+const challengeData = [
+  {
+    id: 1,
+    question: "Which element is used to get highlighted text in HTML5?",
+    options: [
+      { id: 'u', text: "Underline Tag" },
+      { id: 'mark', text: "Mark Tag" },
+      { id: 'highlight', text: "Highlight Tag" }
+    ]
+  },
+  {
+    id: 2,
+    question: "How do you select an element with id='header' in CSS?",
+    options: [
+      { id: 'a', text: "#header" },
+      { id: 'b', text: ".header" },
+      { id: 'c', text: "header" }
+    ]
+  },
+  {
+    id: 3,
+    question: "What does 'git push origin main' do?",
+    options: [
+      { id: 'a', text: "Clones the repository" },
+      { id: 'b', text: "Uploads your local changes to the main branch" },
+      { id: 'c', text: "Creates a new branch" }
+    ]
+  }
+];
+
+// ... (the rest of your server.js file remains the same)
 
 // An API endpoint to get challenge data
 app.get('/api/challenge', (req, res) => {
-  res.json(challengeData);
+  const randomIndex = Math.floor(Math.random() * challengeData.length);
+  const randomChallenge = challengeData[randomIndex];
+  res.json(randomChallenge);
 });
 
 // Start the server
