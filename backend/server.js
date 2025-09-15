@@ -14,12 +14,13 @@ app.get('/', (req, res) => {
 });
 
 // Sample data for the challenge
+// TEXT HAS BEEN CHANGED HERE
 const challengeData = {
   question: "Which element is used to get highlighted text in HTML5?",
   options: [
-    { id: 'u', text: "<u>" },
-    { id: 'mark', text: "<mark>" },
-    { id: 'highlight', text: "<highlight>" }
+    { id: 'u', text: "Underline Tag" },
+    { id: 'mark', text: "Mark Tag" },
+    { id: 'highlight', text: "Highlight Tag" }
   ]
 };
 
