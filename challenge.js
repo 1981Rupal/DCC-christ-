@@ -2,9 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. **PASTE YOUR CODESPACES URL HERE**
     //    Copy the URL you found in your Ports tab (e.g., https://<your-name>-3000.app.github.dev)
-    const API_BASE_URL = 'https://crispy-waffle-4j79jqrq7x45hjp66-3000.app.github.dev';
+    const API_BASE_URL = 'https://dcc-christ.onrender.com';
     const API_URL = `${API_BASE_URL}/api/challenge`;
-
     const questionBox = document.querySelector('.question-box');
     const optionsContainer = document.querySelector('.options-container');
     let clearButton = document.querySelector('.clear-response-btn');

@@ -1,12 +1,8 @@
 const express = require('express');
 const app = express();
-const cors = require('cors'); // Step 1: Add the cors package
-
-// Step 2: Enable CORS for all requests
-app.use(cors());
 
 // We are setting the port to 8080 to match the Codespaces port forwarding.
-const PORT = 8080; 
+const PORT = process.env.PORT || 8080; 
 
 // A simple API endpoint for the root URL
 app.get('/', (req, res) => {
