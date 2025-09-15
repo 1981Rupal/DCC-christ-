@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // This is the public URL for your live back-end API on Render
     const API_BASE_URL = 'https://dcc-christ.onrender.com';
     const API_URL = `${API_BASE_URL}/api/challenge`;
 
     const questionBox = document.querySelector('.question-box');
     const optionsContainer = document.querySelector('.options-container');
-    let clearButton = document.querySelector('.clear-response-btn');
+    const prevButton = document.querySelector('.prev-btn');
+    const nextButton = document.querySelector('.next-btn');
+
+    let allChallenges = [];
+    let currentQuestionIndex = 0;
 
     const fetchChallengeData = async () => {
         try {
@@ -14,17 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const data = await response.json();
-            displayChallenge(data);
+            allChallenges = await response.json();
+            displayChallenge();
         } catch (error) {
             console.error("Could not fetch challenge data:", error);
             questionBox.innerHTML = "<p>Failed to load challenge. Please try again later.</p>";
         }
     };
 
-    const displayChallenge = (challenge) => {
+    const displayChallenge = () => {
+        if (allChallenges.length === 0) {
+            questionBox.innerHTML = "<p>No challenges available.</p>";
+            return;
+        }
+
+        const challenge = allChallenges[currentQuestionIndex];
+        
+        // Update the question
         questionBox.innerHTML = `<p>${challenge.question}</p>`;
 
+        // Update the options
         optionsContainer.innerHTML = '';
         challenge.options.forEach(option => {
             const optionDiv = document.createElement('div');
@@ -39,12 +51,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        if (clearButton) {
-            clearButton.addEventListener('click', () => {
-                document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
-            });
+        updateNavigationButtons();
+    };
+
+    const updateNavigationButtons = () => {
+        // Handle "Previous" button
+        if (currentQuestionIndex === 0) {
+            prevButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'inline-block';
+        }
+
+        // Handle "Next" button
+        if (currentQuestionIndex === allChallenges.length - 1) {
+            nextButton.style.display = 'none';
+        } else {
+            nextButton.style.display = 'inline-block';
         }
     };
+
+    // Event listeners for the navigation buttons
+    prevButton.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            displayChallenge();
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentQuestionIndex < allChallenges.length - 1) {
+            currentQuestionIndex++;
+            displayChallenge();
+        }
+    });
 
     fetchChallengeData();
 });
