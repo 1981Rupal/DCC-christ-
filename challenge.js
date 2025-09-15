@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionsContainer = document.querySelector('.options-container');
     const prevButton = document.querySelector('.prev-btn');
     const nextButton = document.querySelector('.next-btn');
+    const clearButton = document.querySelector('.clear-response-btn');
 
     let allChallenges = [];
     let currentQuestionIndex = 0;
@@ -33,10 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const challenge = allChallenges[currentQuestionIndex];
         
-        // Update the question
         questionBox.innerHTML = `<p>${challenge.question}</p>`;
 
-        // Update the options
         optionsContainer.innerHTML = '';
         challenge.options.forEach(option => {
             const optionDiv = document.createElement('div');
@@ -51,18 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        if (clearButton) {
+            clearButton.addEventListener('click', () => {
+                document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
+            });
+        }
+        
         updateNavigationButtons();
     };
 
     const updateNavigationButtons = () => {
-        // Handle "Previous" button
         if (currentQuestionIndex === 0) {
             prevButton.style.display = 'none';
         } else {
             prevButton.style.display = 'inline-block';
         }
 
-        // Handle "Next" button
         if (currentQuestionIndex === allChallenges.length - 1) {
             nextButton.style.display = 'none';
         } else {
@@ -70,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Event listeners for the navigation buttons
     prevButton.addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
