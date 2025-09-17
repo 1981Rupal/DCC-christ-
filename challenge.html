@@ -3,29 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Challenge</title>
+    <title>Daily Coding Challenge</title>
     <link rel="stylesheet" href="challenge.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="challenge-container">
-        <header class="challenge-header">
-            <h1>CHALLENGE</h1>
-        </header>
-
-        <div class="question-box">
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>DCC</h2>
             </div>
+            <ul class="sidebar-menu">
+                <li><a href="student-dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+                <li class="active"><a href="challenge.html"><span class="icon">🧩</span> Challenges</a></li>
+                <li><a href="profile.html"><span class="icon">👤</span> Profile</a></li>
+                <li class="logout"><a href="#" id="logout-btn"><span class="icon">🚪</span> Logout</a></li>
+            </ul>
+        </nav>
 
-        <div class="options-container">
-            </div>
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Daily Coding Challenge</h1>
+                <div class="user-info">
+                    <span id="user-name">Student</span>
+                    <div class="avatar">S</div>
+                </div>
+            </header>
 
-        <div class="action-section">
-            <button class="clear-response-btn">Clear my response</button>
-            <div class="navigation-buttons">
-                <a href="dashboard.html" class="nav-btn prev-btn">&lt;&lt;Previous</a>
-                <a href="mentors.html" class="nav-btn next-btn">Next&gt;&gt;</a>
+            <div class="challenge-container">
+                <div class="challenge-header">
+                    <h2>Today's Challenge</h2>
+                    <div class="challenge-meta">
+                        <span class="difficulty" id="challenge-difficulty">Medium</span>
+                        <span class="due-date" id="challenge-due-date">Due: Today</span>
+                    </div>
+                </div>
+
+                <div class="challenge-content">
+                    <div class="question-box">
+                        <div class="loading-spinner" id="loading-spinner"></div>
+                    </div>
+
+                    <div class="options-container"></div>
+
+                    <div class="challenge-image-container" id="challenge-image-container">
+                        <!-- Challenge image will be displayed here if available -->
+                    </div>
+
+                    <div class="submission-section">
+                        <div class="file-upload-container">
+                            <input type="file" id="submission-file" class="file-input" accept="image/*,.pdf">
+                            <label for="submission-file" class="file-label">
+                                <span class="icon">📎</span> Attach Solution File
+                            </label>
+                            <span class="file-name" id="file-name">No file selected</span>
+                        </div>
+                        <button class="submit-btn" id="submit-btn">Submit Solution</button>
+                    </div>
+                </div>
+
+                <div class="action-section">
+                    <button class="clear-response-btn">Clear my response</button>
+                    <div class="navigation-buttons">
+                        <button class="nav-btn prev-btn" id="prev-challenge">&lt;&lt; Previous</button>
+                        <button class="nav-btn next-btn" id="next-challenge">Next &gt;&gt;</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
     
     <script src="challenge.js"></script>

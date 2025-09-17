@@ -1,28 +1,139 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is logged in
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    if (!token || !user) {
+        window.location.href = 'login.html';
+        return;
+    }
 
-    const API_BASE_URL = 'https://dcc-christ.onrender.com';
-    const API_URL = `${API_BASE_URL}/api/challenge`;
+    // Update user info in the header
+    const userNameElement = document.getElementById('user-name');
+    if (userNameElement && user.name) {
+        userNameElement.textContent = user.name;
+    }
 
+    // Set up logout functionality
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+    }
+
+    // API endpoints
+    const API_URL = 'http://localhost:8080/api/challenges';
+    const SUBMISSION_URL = 'http://localhost:8080/api/submissions';
+
+    // DOM elements
     const questionBox = document.querySelector('.question-box');
     const optionsContainer = document.querySelector('.options-container');
-    const prevButton = document.querySelector('.prev-btn');
-    const nextButton = document.querySelector('.next-btn');
+    const prevButton = document.getElementById('prev-challenge');
+    const nextButton = document.getElementById('next-challenge');
     const clearButton = document.querySelector('.clear-response-btn');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const challengeDifficulty = document.getElementById('challenge-difficulty');
+    const challengeDueDate = document.getElementById('challenge-due-date');
+    const challengeImageContainer = document.getElementById('challenge-image-container');
+    const fileInput = document.getElementById('submission-file');
+    const fileName = document.getElementById('file-name');
+    const submitBtn = document.getElementById('submit-btn');
 
     let allChallenges = [];
     let currentQuestionIndex = 0;
+    let selectedOption = null;
+
+    // Handle file selection
+    if (fileInput) {
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileName.textContent = e.target.files[0].name;
+            } else {
+                fileName.textContent = 'No file selected';
+            }
+        });
+    }
+
+    // Handle submission
+    if (submitBtn) {
+        submitBtn.addEventListener('click', async () => {
+            if (!selectedOption && !fileInput.files[0]) {
+                alert('Please select an answer or upload a solution file');
+                return;
+            }
+
+            const challenge = allChallenges[currentQuestionIndex];
+            
+            try {
+                const formData = new FormData();
+                formData.append('challengeId', challenge.id);
+                
+                if (selectedOption) {
+                    formData.append('answer', selectedOption);
+                }
+                
+                if (fileInput.files[0]) {
+                    formData.append('image', fileInput.files[0]);
+                }
+
+                const response = await fetch(SUBMISSION_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit solution');
+                }
+
+                const result = await response.json();
+                alert('Solution submitted successfully!');
+                
+                // Clear selection and file
+                document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                fileInput.value = '';
+                fileName.textContent = 'No file selected';
+                selectedOption = null;
+                
+            } catch (error) {
+                console.error('Error submitting solution:', error);
+                alert('Failed to submit solution. Please try again.');
+            }
+        });
+    }
 
     const fetchChallengeData = async () => {
         try {
-            const response = await fetch(API_URL);
+            loadingSpinner.style.display = 'block';
+            
+            const response = await fetch(API_URL, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+            
             allChallenges = await response.json();
-            displayChallenge();
+            loadingSpinner.style.display = 'none';
+            
+            if (allChallenges.length > 0) {
+                displayChallenge();
+            } else {
+                questionBox.innerHTML = "<p>No challenges available.</p>";
+                challengeImageContainer.style.display = 'none';
+            }
         } catch (error) {
             console.error("Could not fetch challenge data:", error);
-            questionBox.innerHTML = "<p>Failed to load challenge. Please try again later.</p>";
+            loadingSpinner.style.display = 'none';
+            questionBox.innerHTML = "<p>Failed to load challenges. Please try again later.</p>";
         }
     };
 
@@ -34,25 +145,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const challenge = allChallenges[currentQuestionIndex];
         
-        questionBox.innerHTML = `<p>${challenge.question}</p>`;
+        // Display challenge details
+        questionBox.innerHTML = `
+            <h3>${challenge.title}</h3>
+            <p>${challenge.description || ''}</p>
+            <p class="question">${challenge.question}</p>
+        `;
 
+        // Display difficulty and due date
+        if (challengeDifficulty) {
+            challengeDifficulty.textContent = challenge.difficulty || 'Medium';
+            challengeDifficulty.className = 'difficulty ' + (challenge.difficulty || '').toLowerCase();
+        }
+
+        if (challengeDueDate && challenge.dueDate) {
+            const dueDate = new Date(challenge.dueDate);
+            challengeDueDate.textContent = `Due: ${dueDate.toLocaleDateString()}`;
+        }
+
+        // Display challenge image if available
+        if (challengeImageContainer) {
+            if (challenge.imageUrl) {
+                challengeImageContainer.innerHTML = `<img src="${challenge.imageUrl}" alt="Challenge Image">`;
+                challengeImageContainer.style.display = 'block';
+            } else {
+                challengeImageContainer.style.display = 'none';
+            }
+        }
+
+        // Display options
         optionsContainer.innerHTML = '';
-        challenge.options.forEach(option => {
-            const optionDiv = document.createElement('div');
-            optionDiv.classList.add('option');
-            optionDiv.dataset.value = option.id;
-            optionDiv.innerHTML = `<span class="icon">&#x1F441;</span><p>${option.text}</p>`;
-            optionsContainer.appendChild(optionDiv);
+        if (challenge.options && challenge.options.length > 0) {
+            challenge.options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.classList.add('option');
+                optionDiv.dataset.value = option.id;
+                optionDiv.innerHTML = `<span class="option-marker">${option.id}</span><p>${option.text}</p>`;
+                optionsContainer.appendChild(optionDiv);
 
-            optionDiv.addEventListener('click', () => {
-                document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-                optionDiv.classList.add('selected');
+                optionDiv.addEventListener('click', () => {
+                    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+                    optionDiv.classList.add('selected');
+                    selectedOption = option.id;
+                });
             });
-        });
+            optionsContainer.style.display = 'block';
+        } else {
+            optionsContainer.style.display = 'none';
+        }
 
+        // Clear button functionality
         if (clearButton) {
             clearButton.addEventListener('click', () => {
                 document.querySelectorAll('.option').forEach(option => option.classList.remove('selected'));
+                selectedOption = null;
+                fileInput.value = '';
+                fileName.textContent = 'No file selected';
             });
         }
         
@@ -61,18 +209,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateNavigationButtons = () => {
         if (currentQuestionIndex === 0) {
-            prevButton.style.display = 'none';
+            prevButton.disabled = true;
+            prevButton.classList.add('disabled');
         } else {
-            prevButton.style.display = 'inline-block';
+            prevButton.disabled = false;
+            prevButton.classList.remove('disabled');
         }
 
         if (currentQuestionIndex === allChallenges.length - 1) {
-            nextButton.style.display = 'none';
+            nextButton.disabled = true;
+            nextButton.classList.add('disabled');
         } else {
-            nextButton.style.display = 'inline-block';
+            nextButton.disabled = false;
+            nextButton.classList.remove('disabled');
         }
     };
 
+    // Navigation button event listeners
     prevButton.addEventListener('click', () => {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
@@ -87,5 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Initialize
     fetchChallengeData();
 });

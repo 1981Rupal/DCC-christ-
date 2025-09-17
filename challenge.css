@@ -1,115 +1,258 @@
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #d2cec3;
+    background-color: #e6f7ff;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
 }
 
+/* App Layout */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.sidebar-menu li {
+    padding: 0;
+    margin: 5px 0;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sidebar-menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-menu li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+.sidebar-menu .icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sidebar-menu li.logout {
+    margin-top: 50px;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Header */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.content-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #4CAF50;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Challenge Container */
 .challenge-container {
-    width: 900px;
     background-color: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin-bottom: 20px;
 }
 
 .challenge-header {
-    background-color: #c7c2b6;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.challenge-header h1 {
+.challenge-header h2 {
     margin: 0;
-    font-size: 2rem;
-    font-weight: 700;
+    color: #333;
+    font-size: 20px;
 }
 
 .question-box {
-    background-color: #e0dfdc;
-    padding: 25px;
+    background-color: #f9f9f9;
+    padding: 20px;
     border-radius: 8px;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #4c2c5b;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+    border-left: 4px solid #4CAF50;
 }
 
 .options-container {
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .option {
     display: flex;
     align-items: center;
-    background-color: #f2f2f2;
-    border-radius: 25px;
-    padding: 15px 25px;
-    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
 }
 
 .option:hover {
-    background-color: #e6e6e6;
+    background-color: #e9f7ef;
 }
 
 .option.selected {
-    background-color: #b2d7b5;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #e8f5e9;
+    border: 1px solid #4CAF50;
 }
 
-.option .icon {
-    font-size: 1.5rem;
-    margin-right: 15px;
-    color: #777;
+/* File Upload Section */
+.file-upload-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
 }
 
-.option p {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 500;
+.file-upload-container h3 {
+    margin-top: 0;
+    color: #4CAF50;
 }
 
+.file-input-wrapper {
+    margin: 15px 0;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Action Buttons */
 .action-section {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
-.clear-response-btn {
-    background-color: transparent;
-    border: none;
-    color: #5a5555;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.navigation-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-btn {
-    background-color: #e0dfdc;
-    border: none;
+.action-button {
     padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 600;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
-.nav-btn:hover {
-    background-color: #cfcfcf;
+.primary-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #3e8e41;
+}
+
+.secondary-button {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.secondary-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #4CAF50;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
