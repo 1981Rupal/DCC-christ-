@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // API endpoints
-    const API_URL = 'http://localhost:8080/api/challenges';
-    const SUBMISSION_URL = 'http://localhost:8080/api/submissions';
+    // API endpoints - Use relative URLs for production
+    const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
+    const API_URL = `${API_BASE}/api/challenges`;
+    const SUBMISSION_URL = `${API_BASE}/api/submissions`;
 
     // DOM elements
     const questionBox = document.querySelector('.question-box');

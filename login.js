@@ -51,9 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         id: 1,
                         username: username,
                         role: 'student',
-                        email: 'student1@example.com'
+                        email: 'student1@example.com',
+                        name: 'Student Name',
+                        class: 'CS101',
+                        semester: 1
                     };
                     localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('token', 'mock-jwt-token-student'); // Add token storage
                     
                     // Redirect to student dashboard
                     window.location.href = 'student-dashboard.html';
@@ -67,10 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         id: 1,
                         username: username,
                         role: 'teacher',
-                        email: 'teacher1@example.com'
+                        email: 'teacher1@example.com',
+                        name: 'Teacher Name',
+                        department: 'Computer Science'
                     };
                     localStorage.setItem('user', JSON.stringify(user));
-                    
+                    localStorage.setItem('token', 'mock-jwt-token-teacher'); // Add token storage
+
                     // Redirect to teacher dashboard
                     window.location.href = 'dashboard.html';
                 } else {
@@ -96,3 +103,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+

@@ -8,7 +8,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Middleware
-app.use(cors());
+const corsOrigins = process.env.NODE_ENV === 'production'
+  ? (process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split(',') : ['https://daily-coding-challenge.onrender.com'])
+  : ['http://localhost:3000', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://127.0.0.1:8080'];
+
+app.use(cors({
+  origin: corsOrigins,
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -30,17 +37,18 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
+const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024 }, // 5MB default
   fileFilter: function (req, file, cb) {
-    const filetypes = /jpeg|jpg|png|gif|pdf/;
+    const allowedTypes = process.env.ALLOWED_FILE_TYPES || 'jpeg,jpg,png,gif,pdf';
+    const filetypes = new RegExp(allowedTypes.replace(/,/g, '|'));
     const mimetype = filetypes.test(file.mimetype);
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     if (mimetype && extname) {
       return cb(null, true);
     }
-    cb(new Error("Only image and PDF files are allowed!"));
+    cb(new Error("File type not allowed!"));
   }
 });
 
@@ -195,9 +203,14 @@ const authorize = (roles = []) => {
   };
 };
 
-// A simple API endpoint for the root URL
+// Serve the login page as the root
 app.get('/', (req, res) => {
-  res.send('Welcome to the Daily Coding Challenge API!');
+  res.sendFile(path.join(__dirname, '../login.html'));
+});
+
+// API health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Daily Coding Challenge API is running!' });
 });
 
 // Image upload endpoints
@@ -500,6 +513,29 @@ app.get('/api/question-bank', authenticateToken, (req, res) => {
   
   // For teachers, return all challenges
   res.json(challengeData);
+});
+
+// Add missing sample data and fix endpoints
+const sampleStudents = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', class: 'CS101', semester: 1, completedChallenges: 5, averageScore: 85 },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', class: 'CS101', semester: 1, completedChallenges: 3, averageScore: 92 },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', class: 'CS102', semester: 2, completedChallenges: 7, averageScore: 78 }
+];
+
+// Students endpoint
+app.get('/api/students', authenticateToken, authorize(['teacher']), (req, res) => {
+    res.json(sampleStudents);
+});
+
+// Dashboard stats endpoint
+app.get('/api/dashboard/stats', authenticateToken, authorize(['teacher']), (req, res) => {
+    const stats = {
+        totalChallenges: challengeData.length,
+        totalStudents: sampleStudents.length,
+        averageScore: 85,
+        pendingReviews: 3
+    };
+    res.json(stats);
 });
 
 // Start the server

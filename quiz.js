@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // API endpoints - Use relative URLs for production
+    const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8080' : '';
+    const API_URL = `${API_BASE}/api/challenges`;
+    const SUBMISSION_URL = `${API_BASE}/api/submissions`;
+
     // Quiz elements
     const questionNumber = document.getElementById('question-number');
     const questionText = document.getElementById('question-text');

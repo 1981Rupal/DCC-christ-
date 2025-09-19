@@ -11,8 +11,8 @@
     <div class="page-container">
         <aside class="sidebar">
             <div class="profile-info">
-                <img src="placeholder-profile.png" alt="User Profile" class="profile-pic">
-                <div class="profile-name">Neha J</div>
+                <div class="profile-pic" style="background-color: #4CAF50; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold;">S</div>
+                <div class="profile-name" id="profile-name">Student Name</div>
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item">Dashboard</a>
@@ -21,7 +21,7 @@
                 <a href="profile.html" class="nav-item">Profile</a>
                 <a href="#" class="nav-item">Announcements</a>
                 <a href="#" class="nav-item">Messages</a>
-                <a href="login.html" class="nav-item">Logout</a>
+                <a href="#" class="nav-item" id="logout-btn">Logout</a>
             </nav>
         </aside>
 
@@ -31,8 +31,8 @@
                     <input type="text" placeholder="Search" class="search-input">
                 </div>
                 <div class="top-bar-icons">
-                    <img src="notification-icon.png" alt="Notifications">
-                    <img src="settings-icon.png" alt="Settings">
+                    <div style="width: 24px; height: 24px; background-color: #666; border-radius: 50%; margin: 0 10px; cursor: pointer;" title="Notifications"></div>
+                    <div style="width: 24px; height: 24px; background-color: #666; border-radius: 3px; margin: 0 10px; cursor: pointer;" title="Settings"></div>
                 </div>
             </header>
 
@@ -86,5 +86,38 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const token = localStorage.getItem('token');
+
+            if (!token || user.role !== 'student') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Set user name and initial
+            const profileName = document.getElementById('profile-name');
+            const profilePic = document.querySelector('.profile-pic');
+
+            if (user.name) {
+                profileName.textContent = user.name;
+                profilePic.textContent = user.name.charAt(0).toUpperCase();
+            } else if (user.username) {
+                profileName.textContent = user.username;
+                profilePic.textContent = user.username.charAt(0).toUpperCase();
+            }
+
+            // Logout functionality
+            document.getElementById('logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
 </body>
 </html>

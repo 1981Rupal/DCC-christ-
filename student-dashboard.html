@@ -658,6 +658,20 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const token = localStorage.getItem('token');
+
+            if (!token || user.role !== 'student') {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update API base URL for production
+            const API_BASE_URL = window.location.hostname === 'localhost'
+                ? 'http://localhost:8080'
+                : '';
+
             // Tab navigation
             const tabLinks = document.querySelectorAll('.sidebar-menu li');
             const tabContents = document.querySelectorAll('.tab-content');
@@ -687,51 +701,45 @@
             // Load challenges
             function loadChallenges() {
                 const challengesList = document.getElementById('challenges-list');
-                challengesList.innerHTML = '';
+                challengesList.innerHTML = '<div class="loading">Loading challenges...</div>';
                 
-                // Sample challenges data (in a real app, fetch from API)
-                const challenges = [
-                    {
-                        id: 1,
-                        title: 'CSS Selectors Challenge',
-                        description: 'Identify the correct CSS selector syntax for targeting an element by its ID.',
-                        difficulty: 'Easy',
-                        dueDate: 'May 17, 2023',
-                        hasImage: false
-                    },
-                    {
-                        id: 2,
-                        title: 'JavaScript Functions',
-                        description: 'Create a function that calculates the factorial of a number.',
-                        difficulty: 'Medium',
-                        dueDate: 'May 24, 2023',
-                        hasImage: true,
-                        imageUrl: 'https://via.placeholder.com/300x200'
+                const token = localStorage.getItem('token');
+                
+                fetch(`${API_BASE_URL}/api/challenges`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
                     }
-                ];
-                
-                challenges.forEach(challenge => {
-                    const card = document.createElement('div');
-                    card.className = 'challenge-card';
-                    card.innerHTML = `
-                        <h3>${challenge.title}</h3>
-                        <p>${challenge.description}</p>
-                        ${challenge.hasImage ? `<img src="${challenge.imageUrl}" alt="${challenge.title}" style="max-width: 100%; margin: 10px 0;">` : ''}
-                        <div class="challenge-meta">
-                            <span>Due: ${challenge.dueDate}</span>
-                            <span>Difficulty: ${challenge.difficulty}</span>
-                        </div>
-                        <button class="btn-primary attempt-btn" data-id="${challenge.id}">Attempt Challenge</button>
-                    `;
-                    challengesList.appendChild(card);
-                });
-                
-                // Add event listeners to attempt buttons
-                document.querySelectorAll('.attempt-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const challengeId = this.getAttribute('data-id');
-                        openChallengeModal(challengeId);
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load challenges');
+                    return response.json();
+                })
+                .then(challenges => {
+                    challengesList.innerHTML = '';
+                    if (challenges.length === 0) {
+                        challengesList.innerHTML = '<p>No challenges available.</p>';
+                        return;
+                    }
+                    
+                    challenges.forEach(challenge => {
+                        const card = document.createElement('div');
+                        card.className = 'challenge-card';
+                        card.innerHTML = `
+                            <h3>${challenge.title}</h3>
+                            <p>${challenge.description}</p>
+                            ${challenge.imageUrl ? `<img src="${challenge.imageUrl}" alt="${challenge.title}" style="max-width: 100%; margin: 10px 0;">` : ''}
+                            <div class="challenge-meta">
+                                <span>Due: ${new Date(challenge.dueDate).toLocaleDateString()}</span>
+                                <span>Difficulty: ${challenge.difficulty}</span>
+                            </div>
+                            <button class="btn-primary attempt-btn" data-id="${challenge.id}">Attempt Challenge</button>
+                        `;
+                        challengesList.appendChild(card);
                     });
+                })
+                .catch(error => {
+                    console.error('Error loading challenges:', error);
+                    challengesList.innerHTML = '<p>Failed to load challenges. Please try again later.</p>';
                 });
             }
             
@@ -921,13 +929,17 @@
             }
             
             // Initialize dashboard
-            document.getElementById('user-name').textContent = 'Jane Smith';
-            
+            document.getElementById('user-name').textContent = user.name || user.username || 'Student';
+
             // Logout functionality
             document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
                 window.location.href = 'login.html';
             });
         });
     </script>
 </body>
 </html>
+
+
