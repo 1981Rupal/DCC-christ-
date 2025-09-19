@@ -8,238 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #3498db;
-            margin: 10px 0;
-        }
-        
-        .stat-label {
-            color: #555;
-            font-size: 0.9rem;
-        }
-        
-        .challenge-list {
-            margin-top: 20px;
-        }
-        
-        .challenge-item {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .challenge-info {
-            flex: 1;
-        }
-        
-        .challenge-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .challenge-meta {
-            display: flex;
-            gap: 15px;
-            color: #777;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        
-        .challenge-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .tab-container {
-            margin-bottom: 20px;
-        }
-        
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-        
-        .tab.active {
-            border-bottom-color: #3498db;
-            color: #3498db;
-            font-weight: 600;
-        }
-        
-        .tab-content {
-            padding: 20px 0;
-        }
-        
-        .tab-pane {
-            display: none;
-        }
-        
-        .tab-pane.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-        }
-        
-        .form-control:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .option-container {
-            margin-bottom: 10px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .option-container input[type="text"] {
-            flex: 1;
-        }
-        
-        .option-container input[type="radio"] {
-            margin-right: 5px;
-        }
-        
-        .add-option-btn {
-            background-color: transparent;
-            border: 1px dashed #3498db;
-            color: #3498db;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        
-        .student-list {
-            margin-top: 20px;
-        }
-        
-        .student-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .student-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #3498db;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
-        
-        .student-name {
-            font-weight: 600;
-        }
-        
-        .student-details {
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        .student-stats {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .student-stat {
-            text-align: center;
-        }
-        
-        .student-stat-value {
-            font-weight: 600;
-            color: #3498db;
-        }
-        
-        .student-stat-label {
-            font-size: 0.8rem;
-            color: #777;
-        }
-        
-        .filter-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .filter-select {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: white;
-        }
-        
-        .chart-container {
-            height: 300px;
-            margin-bottom: 30px;
-        }
+        /* ...existing CSS styles... */
+        /* (Keep your current styles here) */
     </style>
 </head>
 <body>
@@ -251,7 +21,6 @@
                 <button class="logout-btn" id="logout-btn">Logout</button>
             </div>
         </header>
-        
         <div class="dashboard-content">
             <aside class="sidebar">
                 <div class="nav-item active" data-tab="dashboard">
@@ -270,449 +39,97 @@
                     <i class="fas fa-cog"></i> Settings
                 </div>
             </aside>
-            
             <main class="main-content">
                 <!-- Dashboard Tab -->
                 <section id="dashboard" class="tab-pane active">
-                    <h2 class="section-title">Dashboard</h2>
-                    
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-value">24</div>
-                            <div class="stat-label">Active Challenges</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">156</div>
-                            <div class="stat-label">Total Submissions</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">78%</div>
-                            <div class="stat-label">Average Score</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">42</div>
-                            <div class="stat-label">Active Students</div>
-                        </div>
-                    </div>
-                    
-                    <h3 class="section-title">Recent Challenges</h3>
-                    <div class="challenge-list">
-                        <div class="challenge-item">
-                            <div class="challenge-info">
-                                <div class="challenge-title">HTML5 Basics</div>
-                                <div class="challenge-meta">
-                                    <span><i class="fas fa-calendar"></i> Due: May 17, 2023</span>
-                                    <span><i class="fas fa-users"></i> CS-101</span>
-                                    <span><i class="fas fa-layer-group"></i> Semester 3</span>
-                                </div>
-                                <div>Submissions: 32/42 students</div>
-                            </div>
-                            <div class="challenge-actions">
-                                <button class="btn btn-secondary">View Results</button>
-                                <button class="btn">Edit</button>
-                            </div>
-                        </div>
-                        
-                        <div class="challenge-item">
-                            <div class="challenge-info">
-                                <div class="challenge-title">CSS Selectors</div>
-                                <div class="challenge-meta">
-                                    <span><i class="fas fa-calendar"></i> Due: May 19, 2023</span>
-                                    <span><i class="fas fa-users"></i> CS-101</span>
-                                    <span><i class="fas fa-layer-group"></i> Semester 3</span>
-                                </div>
-                                <div>Submissions: 28/42 students</div>
-                            </div>
-                            <div class="challenge-actions">
-                                <button class="btn btn-secondary">View Results</button>
-                                <button class="btn">Edit</button>
-                            </div>
-                        </div>
-                        
-                        <div class="challenge-item">
-                            <div class="challenge-info">
-                                <div class="challenge-title">Git Commands</div>
-                                <div class="challenge-meta">
-                                    <span><i class="fas fa-calendar"></i> Due: May 22, 2023</span>
-                                    <span><i class="fas fa-users"></i> CS-101</span>
-                                    <span><i class="fas fa-layer-group"></i> Semester 3</span>
-                                </div>
-                                <div>Submissions: 15/42 students</div>
-                            </div>
-                            <div class="challenge-actions">
-                                <button class="btn btn-secondary">View Results</button>
-                                <button class="btn">Edit</button>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- ...existing dashboard content... -->
+                    <!-- (Keep your dashboard tab content here) -->
                 </section>
-                
                 <!-- Challenges Tab -->
                 <section id="challenges" class="tab-pane">
-                    <h2 class="section-title">Challenges</h2>
-                    
-                    <div class="tab-container">
-                        <div class="tabs">
-                            <div class="tab active" data-tab-content="all-challenges">All Challenges</div>
-                            <div class="tab" data-tab-content="create-challenge">Create Challenge</div>
-                        </div>
-                        
-                        <div class="tab-content">
-                            <div id="all-challenges" class="tab-pane active">
-                                <div class="filter-container">
-                                    <select class="filter-select" id="class-filter">
-                                        <option value="">All Classes</option>
-                                        <option value="CS-101">CS-101</option>
-                                        <option value="CS-201">CS-201</option>
-                                    </select>
-                                    
-                                    <select class="filter-select" id="semester-filter">
-                                        <option value="">All Semesters</option>
-                                        <option value="1">Semester 1</option>
-                                        <option value="2">Semester 2</option>
-                                        <option value="3">Semester 3</option>
-                                    </select>
-                                    
-                                    <select class="filter-select" id="difficulty-filter">
-                                        <option value="">All Difficulties</option>
-                                        <option value="easy">Easy</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="hard">Hard</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="challenge-list" id="challenge-list">
-                                    <!-- Challenge items will be loaded here -->
-                                </div>
-                            </div>
-                            
-                            <div id="create-challenge" class="tab-pane">
-                                <form id="challenge-form" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label class="form-label">Challenge Title</label>
-                                        <input type="text" class="form-control" id="challenge-title" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label">Question</label>
-                                        <input type="text" class="form-control" id="challenge-question" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label">Description</label>
-                                        <textarea class="form-control" id="challenge-description" rows="3" required></textarea>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label">Image Upload</label>
-                                        <input type="file" class="form-control" id="challenge-image" accept="image/*">
-                                        <div class="image-preview" id="image-preview"></div>
-                                    </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label class="form-label">Class</label>
-                                            <select class="form-control" id="challenge-class" required>
-                                                <option value="">Select Class</option>
-                                                <option value="CS-101">CS-101</option>
-                                                <option value="CS-201">CS-201</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label class="form-label">Semester</label>
-                                            <select class="form-control" id="challenge-semester" required>
-                                                <option value="">Select Semester</option>
-                                                <option value="1">Semester 1</option>
-                                                <option value="2">Semester 2</option>
-                                                <option value="3">Semester 3</option>
-                                            </select>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label class="form-label">Difficulty</label>
-                                            <select class="form-control" id="challenge-difficulty" required>
-                                                <option value="">Select Difficulty</option>
-                                                <option value="easy">Easy</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="hard">Hard</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label class="form-label">Due Date</label>
-                                            <input type="date" class="form-control" id="challenge-due-date" required>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <label class="form-label">Image (Optional)</label>
-                                            <input type="file" class="form-control" id="challenge-image" accept="image/*">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label class="form-label">Options</label>
-                                        <div id="options-container">
-                                            <div class="option-container">
-                                                <input type="radio" name="correct-option" value="a" required>
-                                                <input type="text" class="form-control" placeholder="Option A" required>
-                                            </div>
-                                            <div class="option-container">
-                                                <input type="radio" name="correct-option" value="b">
-                                                <input type="text" class="form-control" placeholder="Option B" required>
-                                            </div>
-                                            <div class="option-container">
-                                                <input type="radio" name="correct-option" value="c">
-                                                <input type="text" class="form-control" placeholder="Option C" required>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="add-option-btn" id="add-option-btn">+ Add Option</button>
-                                    </div>
-                                    
-                                    <button type="submit" class="btn btn-success">Create Challenge</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- ...existing challenges content... -->
                 </section>
-                
                 <!-- Students Tab -->
                 <section id="students" class="tab-pane">
-                    <h2 class="section-title">Students</h2>
-                    
-                    <div class="filter-container">
-                        <select class="filter-select" id="student-class-filter">
-                            <option value="">All Classes</option>
-                            <option value="CS-101">CS-101</option>
-                            <option value="CS-201">CS-201</option>
-                        </select>
-                        
-                        <select class="filter-select" id="student-semester-filter">
-                            <option value="">All Semesters</option>
-                            <option value="1">Semester 1</option>
-                            <option value="2">Semester 2</option>
-                            <option value="3">Semester 3</option>
-                        </select>
-                    </div>
-                    
-                    <div class="student-list" id="student-list">
-                        <div class="student-item">
-                            <div class="student-info">
-                                <div class="student-avatar">JS</div>
-                                <div>
-                                    <div class="student-name">Jane Smith</div>
-                                    <div class="student-details">CS-101 • Semester 3</div>
-                                </div>
-                            </div>
-                            <div class="student-stats">
-                                <div class="student-stat">
-                                    <div class="student-stat-value">85%</div>
-                                    <div class="student-stat-label">Accuracy</div>
-                                </div>
-                                <div class="student-stat">
-                                    <div class="student-stat-value">24/30</div>
-                                    <div class="student-stat-label">Challenges</div>
-                                </div>
-                                <div class="student-stat">
-                                    <div class="student-stat-value">2nd</div>
-                                    <div class="student-stat-label">Rank</div>
-                                </div>
-                            </div>
-                            <button class="btn">View Details</button>
-                        </div>
-                        
-                        <!-- More student items will be loaded here -->
-                    </div>
+                    <!-- ...existing students content... -->
                 </section>
-                
                 <!-- Analytics Tab -->
                 <section id="analytics" class="tab-pane">
-                    <h2 class="section-title">Analytics</h2>
-                    
-                    <div class="filter-container">
-                        <select class="filter-select" id="analytics-class-filter">
-                            <option value="">All Classes</option>
-                            <option value="CS-101">CS-101</option>
-                            <option value="CS-201">CS-201</option>
-                        </select>
-                        
-                        <select class="filter-select" id="analytics-semester-filter">
-                            <option value="">All Semesters</option>
-                            <option value="1">Semester 1</option>
-                            <option value="2">Semester 2</option>
-                            <option value="3">Semester 3</option>
-                        </select>
-                        
-                        <select class="filter-select" id="analytics-period-filter">
-                            <option value="week">Last Week</option>
-                            <option value="month" selected>Last Month</option>
-                            <option value="semester">This Semester</option>
-                        </select>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="participation-chart"></canvas>
-                    </div>
-                    
-                    <div class="chart-container">
-                        <canvas id="performance-chart"></canvas>
-                    </div>
-                    
-                    <div class="stats-container">
-                        <div class="stat-card">
-                            <div class="stat-value">78%</div>
-                            <div class="stat-label">Average Score</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">85%</div>
-                            <div class="stat-label">Participation Rate</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">12 min</div>
-                            <div class="stat-label">Avg. Completion Time</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">65%</div>
-                            <div class="stat-label">First Attempt Success</div>
-                        </div>
-                    </div>
+                    <!-- ...existing analytics content... -->
                 </section>
-                
                 <!-- Settings Tab -->
                 <section id="settings" class="tab-pane">
-                    <h2 class="section-title">Settings</h2>
-                    
-                    <div class="card">
-                        <div class="card-title">Profile Settings</div>
-                        <div class="card-content">
-                            <form id="profile-form">
-                                <div class="form-group">
-                                    <label class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="profile-name" value="John Doe">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="profile-email" value="john.doe@example.com">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Department</label>
-                                    <input type="text" class="form-control" id="profile-department" value="Computer Science">
-                                </div>
-                                
-                                <button type="submit" class="btn">Save Changes</button>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <div class="card" style="margin-top: 20px;">
-                        <div class="card-title">Change Password</div>
-                        <div class="card-content">
-                            <form id="password-form">
-                                <div class="form-group">
-                                    <label class="form-label">Current Password</label>
-                                    <input type="password" class="form-control" id="current-password" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" id="new-password" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" id="confirm-password" required>
-                                </div>
-                                
-                                <button type="submit" class="btn">Change Password</button>
-                            </form>
-                        </div>
-                    </div>
+                    <!-- ...existing settings content... -->
                 </section>
             </main>
         </div>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Check if user is logged in and is a teacher
             const user = JSON.parse(localStorage.getItem('user') || '{}');
             const token = localStorage.getItem('token');
-            
+
             if (!token || user.role !== 'teacher') {
                 window.location.href = 'login.html';
                 return;
             }
-            
-            // Set user name
-            document.getElementById('user-name').textContent = user.name || 'Teacher';
-            
+
+            // Set user name (fallback to username if name is missing)
+            document.getElementById('user-name').textContent = user.name || user.username || 'Teacher';
+
             // Logout functionality
             document.getElementById('logout-btn').addEventListener('click', function() {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
                 window.location.href = 'login.html';
             });
-            
+
             // Tab navigation
             const navItems = document.querySelectorAll('.nav-item');
             const tabPanes = document.querySelectorAll('.tab-pane');
-            
+
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const tabId = this.getAttribute('data-tab');
-                    
-                    // Update active nav item
                     navItems.forEach(navItem => navItem.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // Show corresponding tab pane
                     tabPanes.forEach(pane => pane.classList.remove('active'));
                     document.getElementById(tabId).classList.add('active');
                 });
             });
-            
+
             // Inner tab navigation
             const tabs = document.querySelectorAll('.tab');
-            
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const tabContentId = this.getAttribute('data-tab-content');
                     const tabContainer = this.closest('.tab-container');
-                    
-                    // Update active tab
                     tabContainer.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // Show corresponding tab content
                     tabContainer.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
                     document.getElementById(tabContentId).classList.add('active');
                 });
             });
-            
+
             // Add option button
             const addOptionBtn = document.getElementById('add-option-btn');
             const optionsContainer = document.getElementById('options-container');
             let optionCount = 3; // Already have options a, b, c
-            
+
             addOptionBtn.addEventListener('click', function() {
                 const optionId = String.fromCharCode(97 + optionCount); // a, b, c, d, ...
-                
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option-container';
                 optionDiv.innerHTML = `
                     <input type="radio" name="correct-option" value="${optionId}">
                     <input type="text" class="form-control" placeholder="Option ${optionId.toUpperCase()}" required>
                 `;
-                
                 optionsContainer.appendChild(optionDiv);
                 optionCount++;
             });
-            
+
             // Load challenges
             function loadChallenges() {
                 fetch('http://localhost:8080/api/challenges', {
@@ -727,15 +144,12 @@
                 .then(challenges => {
                     const challengeList = document.getElementById('challenge-list');
                     challengeList.innerHTML = '';
-                    
                     if (challenges.length === 0) {
                         challengeList.innerHTML = '<p>No challenges found.</p>';
                         return;
                     }
-                    
                     challenges.forEach(challenge => {
                         const dueDate = new Date(challenge.dueDate).toLocaleDateString();
-                        
                         const challengeItem = document.createElement('div');
                         challengeItem.className = 'challenge-item';
                         challengeItem.innerHTML = `
@@ -753,7 +167,6 @@
                                 <button class="btn" data-id="${challenge.id}">Edit</button>
                             </div>
                         `;
-                        
                         challengeList.appendChild(challengeItem);
                     });
                 })
@@ -761,13 +174,11 @@
                     console.error('Error loading challenges:', error);
                 });
             }
-            
+
             // Create challenge form submission
             const challengeForm = document.getElementById('challenge-form');
-            
             challengeForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
                 const title = document.getElementById('challenge-title').value;
                 const question = document.getElementById('challenge-question').value;
                 const description = document.getElementById('challenge-description').value;
@@ -776,29 +187,25 @@
                 const difficulty = document.getElementById('challenge-difficulty').value;
                 const dueDate = document.getElementById('challenge-due-date').value;
                 const imageFile = document.getElementById('challenge-image').files[0];
-                
+
                 // Collect options
                 const optionElements = document.querySelectorAll('.option-container');
                 const options = [];
                 let correctAnswer = '';
-                
                 optionElements.forEach((optionEl, index) => {
                     const optionId = String.fromCharCode(97 + index); // a, b, c, d, ...
                     const optionText = optionEl.querySelector('input[type="text"]').value;
                     const isCorrect = optionEl.querySelector('input[type="radio"]').checked;
-                    
                     options.push({ id: optionId, text: optionText });
-                    
                     if (isCorrect) {
                         correctAnswer = optionId;
                     }
                 });
-                
                 if (!correctAnswer) {
                     alert('Please select a correct answer');
                     return;
                 }
-                
+
                 // Create FormData for file upload
                 const formData = new FormData();
                 formData.append('title', title);
@@ -810,10 +217,9 @@
                 formData.append('dueDate', dueDate);
                 formData.append('options', JSON.stringify(options));
                 formData.append('correctAnswer', correctAnswer);
-                
+
                 if (imageFile) {
                     formData.append('image', imageFile);
-                    
                     // First upload the image to get URL
                     fetch('http://localhost:8080/api/upload/challenge', {
                         method: 'POST',
@@ -839,9 +245,8 @@
                     // Submit challenge without image
                     submitChallenge(formData);
                 }
-                
+
                 function submitChallenge(formData) {
-                    // Submit challenge
                     fetch('http://localhost:8080/api/challenges', {
                         method: 'POST',
                         headers: {
@@ -857,8 +262,6 @@
                         alert('Challenge created successfully!');
                         challengeForm.reset();
                         document.getElementById('image-preview').innerHTML = '';
-                        
-                        // Switch to all challenges tab and reload challenges
                         document.querySelector('[data-tab-content="all-challenges"]').click();
                         loadChallenges();
                     })
@@ -868,12 +271,11 @@
                     });
                 }
             });
-            
+
             // Image preview functionality
             document.getElementById('challenge-image').addEventListener('change', function() {
                 const file = this.files[0];
                 const preview = document.getElementById('image-preview');
-                
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -884,7 +286,7 @@
                     preview.innerHTML = '';
                 }
             });
-            
+
             // Initialize charts
             function initCharts() {
                 // Participation Chart
@@ -913,7 +315,7 @@
                         }
                     }
                 });
-                
+
                 // Performance Chart
                 const performanceCtx = document.getElementById('performance-chart').getContext('2d');
                 new Chart(performanceCtx, {
@@ -938,7 +340,7 @@
                     }
                 });
             }
-            
+
             // Load initial data
             loadChallenges();
             initCharts();
