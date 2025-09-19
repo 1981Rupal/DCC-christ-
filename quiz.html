@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Coding Challenge - Quiz</title>
+    <link rel="stylesheet" href="challenge.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px 0;
+        }
+        
+        .question-number {
+            color: #6c63ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .option-item {
+            background-color: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-item:hover {
+            background-color: #eeeeff;
+            border-color: #6c63ff;
+        }
+        
+        .option-item.selected {
+            background-color: #e0e0ff;
+            border-color: #6c63ff;
+        }
+        
+        .option-marker {
+            background-color: #6c63ff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .option-text {
+            flex: 1;
+        }
+        
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background-color: #5a52d5;
+        }
+        
+        .nav-button:disabled {
+            background-color: #c5c5c5;
+            cursor: not-allowed;
+        }
+        
+        .submit-quiz {
+            background-color: #4caf50;
+        }
+        
+        .submit-quiz:hover {
+            background-color: #3d8b40;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #6c63ff;
+            transition: width 0.3s ease;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .timer {
+            background-color: #f5f5f5;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>DCC</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="student-dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+                <li class="active"><a href="challenge.html"><span class="icon">🧩</span> Challenges</a></li>
+                <li><a href="student-profile.html"><span class="icon">👤</span> Profile</a></li>
+                <li class="logout"><a href="#" id="logout-btn"><span class="icon">🚪</span> Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Daily Coding Challenge - Quiz</h1>
+                <div class="user-info">
+                    <span id="user-name">Student</span>
+                    <div class="avatar">S</div>
+                </div>
+            </header>
+
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h2 id="challenge-title">JavaScript Fundamentals</h2>
+                    <div class="timer" id="quiz-timer">Time: 15:00</div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+                
+                <div class="question-number" id="question-number">Question 1 of 5</div>
+                <div class="question-text" id="question-text">What will be the output of the following code?
+                    <pre><code>console.log(typeof null);</code></pre>
+                </div>
+                
+                <ul class="options-list" id="options-list">
+                    <!-- Options will be populated by JavaScript -->
+                </ul>
+                
+                <div class="navigation-controls">
+                    <button class="nav-button" id="prev-button" disabled>Previous</button>
+                    <button class="nav-button" id="next-button">Next</button>
+                    <button class="nav-button submit-quiz" id="submit-button" style="display: none;">Submit Quiz</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="quiz.js"></script>
+</body>
+</html>

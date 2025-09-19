@@ -111,17 +111,74 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             loadingSpinner.style.display = 'block';
             
-            const response = await fetch(API_URL, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+            // Sample challenge data (fallback if API fails)
+            const sampleChallenges = [
+                {
+                    id: 1,
+                    title: "JavaScript Fundamentals",
+                    description: "Test your knowledge of JavaScript basics",
+                    question: "What will be the output of the following code?\n\nconsole.log(typeof null);",
+                    difficulty: "Easy",
+                    dueDate: new Date().toISOString(),
+                    options: [
+                        { id: "A", text: "null" },
+                        { id: "B", text: "undefined" },
+                        { id: "C", text: "object" },
+                        { id: "D", text: "number" }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "CSS Challenge",
+                    description: "Test your knowledge of CSS",
+                    question: "Which CSS property is used to change the text color of an element?",
+                    difficulty: "Easy",
+                    dueDate: new Date().toISOString(),
+                    options: [
+                        { id: "A", text: "color" },
+                        { id: "B", text: "text-color" },
+                        { id: "C", text: "font-color" },
+                        { id: "D", text: "background-color" }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "HTML Structure",
+                    description: "Test your knowledge of HTML",
+                    question: "Which HTML tag is used to define an unordered list?",
+                    difficulty: "Medium",
+                    dueDate: new Date().toISOString(),
+                    options: [
+                        { id: "A", text: "<ol>" },
+                        { id: "B", text: "<ul>" },
+                        { id: "C", text: "<li>" },
+                        { id: "D", text: "<list>" }
+                    ]
                 }
-            });
+            ];
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            try {
+                const response = await fetch(API_URL, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                allChallenges = await response.json();
+                
+                // If API returns empty array, use sample data
+                if (!allChallenges || allChallenges.length === 0) {
+                    allChallenges = sampleChallenges;
+                }
+            } catch (error) {
+                console.error("Could not fetch challenge data from API, using sample data:", error);
+                allChallenges = sampleChallenges;
             }
             
-            allChallenges = await response.json();
             loadingSpinner.style.display = 'none';
             
             if (allChallenges.length > 0) {
@@ -131,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 challengeImageContainer.style.display = 'none';
             }
         } catch (error) {
-            console.error("Could not fetch challenge data:", error);
+            console.error("Could not load challenges:", error);
             loadingSpinner.style.display = 'none';
             questionBox.innerHTML = "<p>Failed to load challenges. Please try again later.</p>";
         }
