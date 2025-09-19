@@ -153,8 +153,8 @@ const challengeData = [
   }
 ];
 
-// Submissions data
-const submissions = [
+// Submissions data - Initialize with sample data
+let submissions = [
   {
     id: 1,
     challengeId: 1,
@@ -176,6 +176,64 @@ const submissions = [
     imageUrl: null
   }
 ];
+
+// Additional data structures for comprehensive functionality
+let questionBank = [
+  {
+    id: 1,
+    title: 'Two Sum Problem',
+    difficulty: 'easy',
+    topic: 'arrays',
+    description: 'Find two numbers in an array that add up to a target sum',
+    question: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.',
+    starterCode: 'function twoSum(nums, target) {\n    // Your code here\n}',
+    testCases: [
+      { input: '[2,7,11,15], 9', expected: '[0,1]' },
+      { input: '[3,2,4], 6', expected: '[1,2]' },
+      { input: '[3,3], 6', expected: '[0,1]' }
+    ],
+    createdBy: 1,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 2,
+    title: 'Reverse Linked List',
+    difficulty: 'medium',
+    topic: 'data-structures',
+    description: 'Reverse a singly linked list iteratively and recursively',
+    question: 'Given the head of a singly linked list, reverse the list, and return the reversed list.',
+    starterCode: 'function reverseList(head) {\n    // Your code here\n}',
+    testCases: [
+      { input: '[1,2,3,4,5]', expected: '[5,4,3,2,1]' },
+      { input: '[1,2]', expected: '[2,1]' },
+      { input: '[]', expected: '[]' }
+    ],
+    createdBy: 1,
+    createdAt: new Date().toISOString()
+  }
+];
+
+let studentProgress = [];
+let leaderboardData = [
+  { rank: 1, studentId: 2, name: 'Jane Smith', score: 2680, change: 0 },
+  { rank: 2, studentId: 3, name: 'Alex Johnson', score: 2450, change: 1 }
+];
+
+let analyticsData = {
+  classPerformance: {
+    average: 82,
+    trend: 5,
+    distribution: { excellent: 8, good: 12, average: 15, needsImprovement: 5 }
+  },
+  engagement: {
+    rate: 87,
+    trend: 3
+  },
+  completion: {
+    rate: 78,
+    trend: 8
+  }
+};
 
 // Authentication middleware
 const authenticateToken = (req, res, next) => {
@@ -538,7 +596,254 @@ app.get('/api/dashboard/stats', authenticateToken, authorize(['teacher']), (req,
     res.json(stats);
 });
 
+// ===== COMPREHENSIVE API ENDPOINTS FOR REAL-TIME DATA MANAGEMENT =====
+
+// Student Progress API
+app.get('/api/student/progress/:studentId', authenticateToken, (req, res) => {
+    const studentId = parseInt(req.params.studentId);
+    const progress = studentProgress.filter(p => p.studentId === studentId);
+
+    const progressSummary = {
+        totalChallenges: progress.length,
+        averageScore: progress.length > 0 ? Math.round(progress.reduce((sum, p) => sum + (p.score / p.maxScore * 100), 0) / progress.length) : 0,
+        totalTimeSpent: progress.reduce((sum, p) => sum + p.timeSpent, 0),
+        recentProgress: progress.slice(-10).map(p => ({
+            challengeId: p.challengeId,
+            score: p.score,
+            maxScore: p.maxScore,
+            percentage: Math.round((p.score / p.maxScore) * 100),
+            completedAt: p.completedAt
+        }))
+    };
+
+    res.json(progressSummary);
+});
+
+// Leaderboard API
+app.get('/api/leaderboard', authenticateToken, (req, res) => {
+    const { period = 'week', class: classFilter = 'all' } = req.query;
+
+    // Mock filtering logic based on period and class
+    let filteredLeaderboard = [...leaderboardData];
+
+    if (period === 'month') {
+        filteredLeaderboard = filteredLeaderboard.map(entry => ({
+            ...entry,
+            score: Math.round(entry.score * 1.2)
+        }));
+    } else if (period === 'semester') {
+        filteredLeaderboard = filteredLeaderboard.map(entry => ({
+            ...entry,
+            score: Math.round(entry.score * 2.5)
+        }));
+    }
+
+    // Sort by score and update ranks
+    filteredLeaderboard.sort((a, b) => b.score - a.score);
+    filteredLeaderboard.forEach((entry, index) => {
+        entry.rank = index + 1;
+    });
+
+    res.json(filteredLeaderboard);
+});
+
+// Analytics API for Teachers
+app.get('/api/analytics/comprehensive', authenticateToken, authorize(['teacher']), (req, res) => {
+    const { period = 'week', class: classFilter = 'all' } = req.query;
+
+    // Generate comprehensive analytics
+    const analytics = {
+        classPerformance: {
+            average: 82 + Math.round(Math.random() * 10),
+            trend: Math.round((Math.random() - 0.5) * 20),
+            distribution: {
+                excellent: 8 + Math.round(Math.random() * 5),
+                good: 12 + Math.round(Math.random() * 8),
+                average: 15 + Math.round(Math.random() * 10),
+                needsImprovement: 5 + Math.round(Math.random() * 5)
+            }
+        },
+        engagement: {
+            rate: 85 + Math.round(Math.random() * 10),
+            trend: Math.round((Math.random() - 0.5) * 10),
+            weeklyActivity: [3, 5, 2, 4, 6, 1, 2]
+        },
+        completion: {
+            rate: 78 + Math.round(Math.random() * 15),
+            trend: Math.round(Math.random() * 10),
+            averageTime: `${25 + Math.round(Math.random() * 20)}min`
+        },
+        topPerformers: leaderboardData.slice(0, 5).map((student, index) => ({
+            name: student.name,
+            score: student.score,
+            rank: index + 1
+        })),
+        challengePerformance: challengeData.slice(0, 5).map(challenge => ({
+            name: challenge.title,
+            attempts: Math.round(20 + Math.random() * 30),
+            successRate: Math.round(60 + Math.random() * 35),
+            avgScore: Math.round(70 + Math.random() * 25),
+            difficulty: challenge.difficulty
+        })),
+        insights: [
+            {
+                type: 'success',
+                icon: 'fa-chart-line',
+                title: 'Strong Progress in Arrays',
+                description: 'Students are showing 23% improvement in array-based challenges this month.',
+                action: 'view_array_progress',
+                actionText: 'View Details'
+            },
+            {
+                type: 'warning',
+                icon: 'fa-exclamation-triangle',
+                title: 'Struggling with Recursion',
+                description: '40% of students need additional support with recursive algorithms.',
+                action: 'create_recursion_help',
+                actionText: 'Create Help Session'
+            }
+        ]
+    };
+
+    res.json(analytics);
+});
+
+// Question Bank API
+app.get('/api/questions', authenticateToken, (req, res) => {
+    const { difficulty, topic, search } = req.query;
+
+    let filteredQuestions = [...questionBank];
+
+    if (difficulty) {
+        filteredQuestions = filteredQuestions.filter(q => q.difficulty === difficulty);
+    }
+
+    if (topic) {
+        filteredQuestions = filteredQuestions.filter(q => q.topic === topic);
+    }
+
+    if (search) {
+        const searchLower = search.toLowerCase();
+        filteredQuestions = filteredQuestions.filter(q =>
+            q.title.toLowerCase().includes(searchLower) ||
+            q.description.toLowerCase().includes(searchLower)
+        );
+    }
+
+    res.json(filteredQuestions);
+});
+
+// Add new question to bank
+app.post('/api/questions', authenticateToken, authorize(['teacher']), (req, res) => {
+    const { title, difficulty, topic, description, question, starterCode, testCases } = req.body;
+
+    const newQuestion = {
+        id: questionBank.length + 1,
+        title,
+        difficulty,
+        topic,
+        description,
+        question,
+        starterCode,
+        testCases,
+        createdBy: req.user.id,
+        createdAt: new Date().toISOString()
+    };
+
+    questionBank.push(newQuestion);
+    res.status(201).json(newQuestion);
+});
+
+// Student Challenge Submission API
+app.post('/api/challenges/:challengeId/submit', authenticateToken, authorize(['student']), (req, res) => {
+    const challengeId = parseInt(req.params.challengeId);
+    const { answers, timeSpent } = req.body;
+
+    // Find the challenge
+    const challenge = challengeData.find(c => c.id === challengeId);
+    if (!challenge) {
+        return res.status(404).json({ error: 'Challenge not found' });
+    }
+
+    // Calculate score (simplified scoring)
+    let totalScore = 0;
+    let maxScore = 100; // Default max score
+
+    // Mock scoring logic
+    if (answers && Object.keys(answers).length > 0) {
+        totalScore = Math.round(60 + Math.random() * 40); // Random score between 60-100
+    }
+
+    // Create submission record
+    const submission = {
+        id: submissions.length + 1,
+        studentId: req.user.id,
+        challengeId,
+        answers,
+        score: totalScore,
+        maxScore,
+        timeSpent: timeSpent || 0,
+        submittedAt: new Date().toISOString()
+    };
+
+    submissions.push(submission);
+
+    // Update student progress
+    const progressEntry = {
+        studentId: req.user.id,
+        challengeId,
+        score: totalScore,
+        maxScore,
+        timeSpent: timeSpent || 0,
+        completedAt: new Date().toISOString(),
+        answers
+    };
+
+    studentProgress.push(progressEntry);
+
+    res.status(201).json({
+        submissionId: submission.id,
+        score: totalScore,
+        maxScore,
+        percentage: Math.round((totalScore / maxScore) * 100),
+        message: 'Challenge submitted successfully!'
+    });
+});
+
+// Real-time updates endpoint (Server-Sent Events)
+app.get('/api/realtime/updates', authenticateToken, (req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+        'Access-Control-Allow-Origin': '*'
+    });
+
+    // Send initial data
+    res.write(`data: ${JSON.stringify({ type: 'connected', message: 'Real-time updates connected' })}\n\n`);
+
+    // Send periodic updates (every 30 seconds)
+    const interval = setInterval(() => {
+        const update = {
+            type: 'stats_update',
+            data: {
+                timestamp: new Date().toISOString(),
+                activeUsers: Math.round(10 + Math.random() * 20),
+                recentSubmissions: Math.round(Math.random() * 5),
+                leaderboardChanges: Math.round(Math.random() * 3)
+            }
+        };
+        res.write(`data: ${JSON.stringify(update)}\n\n`);
+    }, 30000);
+
+    // Clean up on client disconnect
+    req.on('close', () => {
+        clearInterval(interval);
+    });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Real-time data management APIs are active`);
 });

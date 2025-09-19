@@ -256,3 +256,394 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Enhanced Challenge Styles */
+
+/* Challenge Title Section */
+.challenge-title-section {
+    flex: 1;
+}
+
+.challenge-title {
+    margin: 0 0 8px 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary, #1f2937);
+}
+
+.challenge-description {
+    margin: 0;
+    color: var(--text-secondary, #6b7280);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Timer Container */
+.timer-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-secondary, #f8fafc);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light, #e5e7eb);
+}
+
+.timer-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #6b7280);
+}
+
+.timer {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--success, #059669);
+}
+
+/* Progress Bar */
+.challenge-progress-bar {
+    background: var(--bg-primary, #ffffff);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-light, #e5e7eb);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.challenge-progress {
+    font-weight: 600;
+    color: var(--text-primary, #1f2937);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-tertiary, #f1f5f9);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    border-radius: 8px;
+    transition: width 0.3s ease;
+}
+
+/* Code Editor */
+.code-editor {
+    background: var(--bg-primary, #ffffff);
+    border-radius: 12px;
+    border: 1px solid var(--border-light, #e5e7eb);
+    margin: 20px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.code-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-light, #e5e7eb);
+    background: var(--bg-secondary, #f8fafc);
+    border-radius: 12px 12px 0 0;
+}
+
+.code-editor-header h4 {
+    margin: 0;
+    color: var(--text-primary, #1f2937);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.code-textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 20px;
+    border: none;
+    background: var(--bg-primary, #ffffff);
+    color: var(--text-primary, #1f2937);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    border-radius: 0 0 12px 12px;
+}
+
+.code-textarea:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px #2563eb;
+}
+
+.code-output {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-light, #e5e7eb);
+    background: var(--bg-tertiary, #f1f5f9);
+    border-radius: 0 0 12px 12px;
+}
+
+.code-output h5 {
+    margin: 0 0 10px 0;
+    color: var(--text-primary, #1f2937);
+    font-weight: 600;
+}
+
+#output-content {
+    background: var(--bg-primary, #ffffff);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light, #e5e7eb);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--text-primary, #1f2937);
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+/* Question Styles */
+.question-points {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.question-description {
+    background: var(--bg-secondary, #f8fafc);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 4px solid #2563eb;
+}
+
+.test-cases {
+    background: var(--bg-tertiary, #f1f5f9);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+.test-cases h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-primary, #1f2937);
+    font-weight: 600;
+}
+
+.test-case {
+    background: var(--bg-primary, #ffffff);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 5px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-light, #e5e7eb);
+}
+
+/* Keyboard Shortcuts */
+.keyboard-shortcuts {
+    background: var(--bg-secondary, #f8fafc);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    border: 1px solid var(--border-light, #e5e7eb);
+}
+
+.keyboard-shortcuts h5 {
+    margin: 0 0 10px 0;
+    color: var(--text-primary, #1f2937);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shortcuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary, #6b7280);
+}
+
+kbd {
+    background: var(--bg-primary, #ffffff);
+    border: 1px solid var(--border-light, #e5e7eb);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Results Modal */
+.results-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.results-content {
+    background: var(--bg-primary, #ffffff);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+.score-display {
+    margin: 30px 0;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.score-percentage {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.score-grade {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.score-details {
+    background: var(--bg-secondary, #f8fafc);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.score-details p {
+    margin: 8px 0;
+    color: var(--text-primary, #1f2937);
+}
+
+.results-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Review Mode */
+.review-info {
+    background: var(--bg-secondary, #f8fafc);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #2563eb;
+}
+
+.answer-status {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.answer-status.correct {
+    color: var(--success, #059669);
+}
+
+.answer-status.incorrect {
+    color: var(--error, #dc2626);
+}
+
+.correct-answer,
+.explanation {
+    margin: 10px 0;
+    color: var(--text-primary, #1f2937);
+}
+
+.explanation {
+    font-style: italic;
+    color: var(--text-secondary, #6b7280);
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+    .challenge-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .challenge-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .challenge-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .progress-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .shortcuts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-content {
+        padding: 20px;
+    }
+
+    .results-actions {
+        flex-direction: column;
+    }
+
+    .code-editor-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .timer-container {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+}
